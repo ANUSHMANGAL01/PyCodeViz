@@ -17,6 +17,7 @@ def fact(n):
         return n*fact(n-1)
 print(fact(2))
 list = [1,2,True, "Hello", 4.5]
+list2 = [3,3,3,3]
 
 for i in range(2):
     j=0
