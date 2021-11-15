@@ -6,7 +6,7 @@ class Anush:
     def hello():
         print("Hello")
 print(10+5)
-
+ffff = True
 for i in range(5):
     print(i)
     
