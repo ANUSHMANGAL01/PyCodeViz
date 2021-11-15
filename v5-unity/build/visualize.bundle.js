@@ -1916,6 +1916,30 @@ var DataVisualizer = (function () {
 		return -1;
 	}
 
+	var funcDetect = function(str){
+		var l = str.length;
+		var space = spaceCount(str);
+		if(l<space+5 || space==-1)
+		return -1;
+		else
+		if(str[space]==='d' && str[space+1]==='e'&&str[space+2]==='f' && str[space+3]==' '&&str[l-1]==':')
+		{
+			return space;
+		}
+		return -1;
+	}
+
+	var classDetect =	function(str){
+		var l = str.length;
+		var space = spaceCount(str);
+		var x = space;
+		if(l < space + 6 || space === -1)
+			return -1
+		else if(str[space]==='c' && str[space+1]==='l' && str[space+2]==='a' && str[space+3]==='s' && str[space+4]==='s'&&str[space+5]===' ' && str[l-1]===':')
+			return space;
+		return -1;
+	}
+
 
 	DataVisualizer.prototype.renderFlowStructures = function (curInstr) {
 		//To render ifs and fors
@@ -1953,6 +1977,16 @@ var DataVisualizer = (function () {
 						{
 							if(whileDetect(curInstLine)===-1)
 							{
+								if(funcDetect(curInstLine)!==-1)
+								{
+									document.getElementById(currentLineNumberId).style.backgroundColor="lightblue";
+									document.getElementById(currentLineCodeId).style.color="black";
+								}
+								if(classDetect(curInstLine)!==-1)
+								{
+									document.getElementById(currentLineNumberId).style.backgroundColor="orange";
+									document.getElementById(currentLineCodeId).style.color="black";
+								}	
 								return false;
 							}
 							else
@@ -1971,13 +2005,16 @@ var DataVisualizer = (function () {
 							document.getElementById(currentLineCodeId).style.color="black";
 						}
 					}
+
+					
 				else
 				{
 					var temp={'flowType':'IF', 'frontSpace':curSpace, 'text':curInstLine, 'isTaken':'nyet' , 'instNo':curInstr , 'line':curTrace[curInstr]['line']};
 					scopeStack.push(temp);
 					document.getElementById(currentLineNumberId).style.backgroundColor="lightgrey";
 					document.getElementById(currentLineCodeId).style.color="black";
-				}	
+				}
+				
 			}
 			else
 			{
@@ -2009,7 +2046,16 @@ var DataVisualizer = (function () {
 					document.getElementById(currentLineNumberId).style.backgroundColor="yellow";
 					document.getElementById(currentLineCodeId).style.color="black";
 				}
-
+				if(funcDetect(curInstLine)!==-1)
+				{
+					document.getElementById(currentLineNumberId).style.backgroundColor="lightblue";
+					document.getElementById(currentLineCodeId).style.color="black";
+				}
+				if(classDetect(curInstLine)!==-1)
+				{
+					document.getElementById(currentLineNumberId).style.backgroundColor="orange";
+					document.getElementById(currentLineCodeId).style.color="black";
+				}	
 				for(i ; i>0 ; i--)
 				{
 					//curSpace =0 break
