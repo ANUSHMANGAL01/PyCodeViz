@@ -2869,9 +2869,38 @@ var DataVisualizer = (function () {
 			// console.log("Inside stack header "+headerLabel);
 			// console.log(set.has(headerLabel));
 			if(set.has(headerLabel))
-			return headerLabel+"  (Recursive)";
+			return headerLabel+"  (Recursive) " ;
 			else
-            return headerLabel;
+            return headerLabel +" "+ i;
+        });
+        sfdEnter
+            .append('div')
+            .attr('class', 'stackFrameHeader')
+            .html(function (frame, i) {
+            // pretty-print lambdas and display other weird characters
+            // (might contain '<' or '>' for weird names like <genexpr>)
+            var funcName = htmlspecialchars(frame.func_name).replace('&lt;lambda&gt;', '\u03bb')
+                .replace('\n', '<br/>');
+            var headerLabel = funcName;
+            // only display if you're someone's parent (unless showAllFrameLabels)
+            if (frame.is_parent || myViz.params.showAllFrameLabels) {
+                headerLabel = 'f' + frame.frame_id + ': ' + headerLabel;
+            }
+            // optional (btw, this isn't a CSS id)
+            if (frame.parent_frame_id_list.length > 0) {
+                var parentFrameID = frame.parent_frame_id_list[0];
+                headerLabel = headerLabel + ' [parent=f' + parentFrameID + ']';
+            }
+            else if (myViz.params.showAllFrameLabels) {
+                headerLabel = headerLabel + ' [parent=Global]';
+            }
+			var recursive_flag = false;
+			if(set.has(headerLabel))
+			recursive_flag=true;
+			if(!recursive_flag)
+			return null;
+			return "Iteration number "+(i+1);
+
         });
         
 		
