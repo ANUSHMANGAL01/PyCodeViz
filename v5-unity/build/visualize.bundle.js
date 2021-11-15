@@ -2114,7 +2114,7 @@ var DataVisualizer = (function () {
 						//if the previous line is IF or elif
 						
 						var isTaken = (curTrace[i-1]['line']=== curTrace[i]['line']-1); // boolean variable to store the value
-						console.log("previous line is if"+prevInstLine +" "+ isTaken);
+						// console.log("previous line is if"+prevInstLine +" "+ isTaken);
 						var temp={'flowType':'IF', 'frontSpace':prevIfNum, 'text':prevInstLine, 'isTaken':isTaken , 'instNo':i-1 , 'line':curTrace[i-1]['line'] };
 						if((scopeStack.length > 0 && scopeStack[scopeStack.length-1]['frontSpace']> temp['frontSpace']) ||scopeStack.length===0 ||((currElif!==-1 || currIf!==-1)&& (currIf===-1 || prevElifNum===-1)))
 						{	
@@ -2340,7 +2340,7 @@ var DataVisualizer = (function () {
 		
 		var curThing = this.curTrace[curInstr].heap;
 		var curEntry = this.curTrace[curInstr];
-
+		var set = this.recursiveFunctions;
 
         var curToplevelLayout = this.curTraceLayouts[curInstr];
         myViz.resetJsPlumbManager(); // very important!!!
@@ -2865,8 +2865,16 @@ var DataVisualizer = (function () {
             else if (myViz.params.showAllFrameLabels) {
                 headerLabel = headerLabel + ' [parent=Global]';
             }
+			var Anush=4;
+			// console.log("Inside stack header "+headerLabel);
+			// console.log(set.has(headerLabel));
+			if(set.has(headerLabel))
+			return headerLabel+"  (Recursive)";
+			else
             return headerLabel;
         });
+        
+		
         sfdEnter
             .append('table')
             .attr('class', 'stackFrameVarTable');
