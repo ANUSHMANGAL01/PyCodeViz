@@ -27,6 +27,7 @@
       width: 100%;
       background-position: center;
       background-size: cover;
+      color: white;
       ">
       
         <!-- nav section -->
@@ -63,8 +64,69 @@ document.getElementById("p2").style.fontSize = "larger";
 
 
 <p style="color: white; text-align: justify;"> This is an extension of the popular online tool Python Tutor. It alters the visualization by separating functional components like Functions and Class declarations. It also adds to the original by rendering separate details like For-Loops, If-conditions and code frequency.</p>
-<p style="color: white; text-align: justify;">Python Tutor <a href="http://pythontutor.com/" style="color: azure;">-- http://pythontutor.com/ --</a>  helps people overcome a fundamental barrier to learning programming: understanding what happens as the computer executes each line of a program's source code. Using this tool, you can write Python, Java, JavaScript, TypeScript, Ruby, C, and C++ programs in your Web browser and visualize what the computer is doing step-by-step as it executes those programs.</p>
-<p style="color: white; text-align: justify;">All documentation is viewable online at: <a href="https://github.com/ajesse11x/OnlinePythonTutor/tree/master/v3/docs" style="color: azure;">https://github.com/ajesse11x/OnlinePythonTutor/tree/master/v3/docs</a> </p>
-<p style="color: white; text-align: justify;">The base code is borrowed from <a href="https://github.com/ajesse11x/OnlinePythonTutor" style="color: azure;">this</a> repository.</p>
+<p style="color: white; text-align: justify;">Python Tutor <a href="http://pythontutor.com/" style="color: yellow;">-- http://pythontutor.com/ --</a>  helps people overcome a fundamental barrier to learning programming: understanding what happens as the computer executes each line of a program's source code. Using this tool, you can write Python, Java, JavaScript, TypeScript, Ruby, C, and C++ programs in your Web browser and visualize what the computer is doing step-by-step as it executes those programs.</p>
+<p style="color: white; text-align: justify;">All documentation is viewable online at: <a href="https://github.com/ajesse11x/OnlinePythonTutor/tree/master/v3/docs" style="color: yellow;">https://github.com/ajesse11x/OnlinePythonTutor/tree/master/v3/docs</a> </p>
+<p style="color: white; text-align: justify;">The base code is borrowed from <a href="https://github.com/ajesse11x/OnlinePythonTutor" style="color: yellow;">this</a> repository.</p>
+<h1 style="color: white;">How to run</h2>
+<p style="color: white; text-align: justify;">All the code is in the v5-unity directory. To run locally on your own computer, to run Python visualizations try:</p>
+
+<div style="color: black; background-color: white; width:600px ; margin-left: 150px;">
+    <code  >pip install bottle # make sure the bottle webserver (http://bottlepy.org/) is installed</code> 
+    <br><code>cd OnlinePythonTutor/v5-unity/</code>
+    <br><code> python bottle_server.py</code>
+</div>
+<p>
+    You should see the visualizer at: <a href="http://localhost:8003/visualize.html" style="color: yellow;">http://localhost:8003/visualize.html</a> </p>
+<ul>
+    <li>
+        Type the python code in the code box in the page that opens up
+    </li>
+    <li>
+        Click the 'Visualize Code' button
+    </li>
+    <li>
+        Move through the code by using the Next or Prev button. You can set-up intermediate stop points to directly jump between too
+    </li>
+    <li>
+        The color of the code line number specifies the frequency of usage of that corresponding code line: gray, if unvisited and darkening shades of yellow to red to indicate increasing frequency
+    </li>
+    <li>
+        There are four sections in the execution visualization: Functions & classes, Frames, Objects and Loop & If structures
+    </li>
+    <li>
+        The Functions and Classes section shows all the global functions and class definitions
+    </li>
+    <li>
+        The Frames section shows all the frame-wise variables both local and global
+    </li>
+    <li>
+        The Objects section shows the complex objects connected to their declaration instance in the frames section
+    </li>
+    <li>
+        The Loops and If section visualizes all the current open loops and iterations and shows various details such as the current iteration number and the truth value of the condition in the If
+    <li>
+        Traverse through the code and have a fun experience learning!
+    </li>
+</ul>
+<h1>
+    The Code Alterations
+</h1>
+<p>
+    All the code alterations are within the v5-unity/build/visualize.bundle.js file Any change to this file will be directly reflected in the local pytutor when reloading
+</p>
+<h1>
+    Acknowledgements
+</h1>
+<p>
+    The forked repository: <a href="https://github.com/ajesse11x/OnlinePythonTutor" style="color: yellow;">https://github.com/ajesse11x/OnlinePythonTutor</a>
+</p>
+
+
+
+
+
+
+
+
 </body>
 </html>

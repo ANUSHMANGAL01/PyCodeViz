@@ -1888,6 +1888,16 @@ var DataVisualizer = (function () {
 		return -1;
 	}
 
+	var elifDetect =	function(str){
+		var l = str.length;
+		var space = spaceCount(str);
+		var x = space;
+		if(l < space + 5 || space === -1)
+			return -1;
+		else if(str[space]==='e' && str[space+1]==='l'&& str[space+2]=='i' && str[space+3]=='f'&&(str[space+4]===' ' || str[space+4]==='('))
+			return space;
+		return -1;
+	}
 	//similarly, a function to detect if the codeline is the start of a for loop
 	//returns the front space (python indentation) if it is indeed an 'FOR'
 	//otherwise returns -1
@@ -1912,6 +1922,17 @@ var DataVisualizer = (function () {
 		if(l < space + 6 || space === -1)
 			return -1
 		else if(str[space]==='w' && str[space+1]==='h' && str[space+2]==='i' && str[space+3]==='l' && str[space+4]==='e'&&(str[space+5]===' ' || str[space+5]==='('))
+			return space;
+		return -1;
+	}
+
+	var printDetect =	function(str){
+		var l = str.length;
+		var space = spaceCount(str);
+		var x = space;
+		if(l < space + 6 || space === -1)
+			return -1
+		else if(str[space]==='p' && str[space+1]==='r' && str[space+2]==='i' && str[space+3]==='n' && str[space+4]==='t'&&(str[space+5]===' ' || str[space+5]==='('))
 			return space;
 		return -1;
 	}
@@ -1971,7 +1992,7 @@ var DataVisualizer = (function () {
 			{
 				// the global scope case
 				// hence the current line is an outermost if/for/while or a normal statement
-				if(ifDetect(curInstLine) === -1)
+				if(ifDetect(curInstLine) === -1 && elifDetect(curInstLine)===-1)
 					{
 						if(forDetect(curInstLine) === -1)
 						{
@@ -1985,6 +2006,11 @@ var DataVisualizer = (function () {
 								if(classDetect(curInstLine)!==-1)
 								{
 									document.getElementById(currentLineNumberId).style.backgroundColor="orange";
+									document.getElementById(currentLineCodeId).style.color="black";
+								}
+								if(printDetect(curInstLine)!==-1)
+								{
+									document.getElementById(currentLineNumberId).style.backgroundColor="#F29EDE";
 									document.getElementById(currentLineCodeId).style.color="black";
 								}	
 								return false;
@@ -2007,7 +2033,7 @@ var DataVisualizer = (function () {
 					}
 
 					
-				else
+				else 
 				{
 					var temp={'flowType':'IF', 'frontSpace':curSpace, 'text':curInstLine, 'isTaken':'nyet' , 'instNo':curInstr , 'line':curTrace[curInstr]['line']};
 					scopeStack.push(temp);
@@ -2021,7 +2047,7 @@ var DataVisualizer = (function () {
 				//the case where the current indentation signifies it is not the global scope
 				var i = curInstr;
 				
-				if(ifDetect(curInstLine) !== -1)
+				if(ifDetect(curInstLine) !== -1 || elifDetect(curInstLine)!==-1)
 				{
 					//detecting the IF in the current line
 					var temp={'flowType':'IF', 'frontSpace':curSpace, 'text':curInstLine, 'isTaken':'nyet' , 'instNo':curInstr , 'line':curTrace[curInstr]['line']};
@@ -2055,6 +2081,11 @@ var DataVisualizer = (function () {
 				{
 					document.getElementById(currentLineNumberId).style.backgroundColor="orange";
 					document.getElementById(currentLineCodeId).style.color="black";
+				}
+				if(printDetect(curInstLine)!==-1)
+				{
+					document.getElementById(currentLineNumberId).style.backgroundColor="#F29EDE";
+					document.getElementById(currentLineCodeId).style.color="black";
 				}	
 				for(i ; i>0 ; i--)
 				{
@@ -2070,16 +2101,22 @@ var DataVisualizer = (function () {
 						//if the global scope is reached, then break
 						break;
 					}
+					var currIf = ifDetect(curInstLine);
+					var currElif = elifDetect(curInstLine);
+
 					var prevInstLine = curCode[curTrace[i-1]['line']-1]['text'];
 					var prevIfNum = ifDetect(prevInstLine);
+					var prevElifNum = elifDetect(prevInstLine);
 					var prevForNum = forDetect(prevInstLine);
 					var prevWhileNum = whileDetect(prevInstLine);
-					if(prevIfNum !== -1)
+					if(prevIfNum !== -1 || prevElifNum!==-1)
 					{
-						//if the previous line is IF
+						//if the previous line is IF or elif
+						
 						var isTaken = (curTrace[i-1]['line']=== curTrace[i]['line']-1); // boolean variable to store the value
+						console.log("previous line is if"+prevInstLine +" "+ isTaken);
 						var temp={'flowType':'IF', 'frontSpace':prevIfNum, 'text':prevInstLine, 'isTaken':isTaken , 'instNo':i-1 , 'line':curTrace[i-1]['line'] };
-						if((scopeStack.length > 0 && scopeStack[scopeStack.length-1]['frontSpace']> temp['frontSpace']) ||scopeStack.length===0)
+						if((scopeStack.length > 0 && scopeStack[scopeStack.length-1]['frontSpace']> temp['frontSpace']) ||scopeStack.length===0 ||((currElif!==-1 || currIf!==-1)&& (currIf===-1 || prevElifNum===-1)))
 						{	
 							//push to scopestack only if it is a currently 'open' if
 							//i.e., it is the lowermost if with the current indendation 
@@ -4345,7 +4382,7 @@ var NavigationController = (function () {
                        <button id="jmpStepFwd", type="button">Forward &gt;</button>\
                        <button id="jmpLastInstr", type="button">Last &gt;&gt;</button>\
                      </div>\
-                     <div id="rawUserInputDiv">\
+                     <div id="rawUserInputDiv"  style="color:white">\
                        <span id="userInputPromptStr"/>\
                        <input type="text" id="raw_input_textbox" size="30"/>\
                        <button id="raw_input_submit_btn">Submit</button>\
@@ -4364,6 +4401,7 @@ var NavigationController = (function () {
         this.domRoot.find("#vcrControls #jmpLastInstr").attr("disabled", true);
         var ruiDiv = this.domRoot.find('#rawUserInputDiv');
         ruiDiv.find('#userInputPromptStr').html(this.owner.userInputPromptStr);
+		ruiDiv.find('#userInputPromptStr').css('color' , 'white');
         ruiDiv.find('#raw_input_submit_btn').click(function () {
             var userInput = ruiDiv.find('#raw_input_textbox').val();
             // advance instruction count by 1 to get to the NEXT instruction
