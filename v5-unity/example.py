@@ -15,7 +15,11 @@ def fact(n):
         return 1
     else:
         return n * fact(n-1);
-print(fact(2))
+def calculate_fact(n):
+    return fact(n)
+def calculate_fact_2(n):
+    return calculate_fact(n)
+print(calculate_fact_2(2))
 list = [1,2,True, "Hello", 4.5]
 list2 = [3,3,3,3]
 
