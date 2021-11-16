@@ -1351,7 +1351,7 @@ var DataVisualizer = (function () {
 			}
 		}
 		this.recursiveFunctions = rf;
-		console.log(rf);
+		// console.log(rf);
 
 
 
@@ -1986,6 +1986,9 @@ var DataVisualizer = (function () {
 		var PreviousLineCodeId = 'v1__cod'+prevLine;
 		// each entry of scopeStack-> {flowType: , frontspace: , text: , isTaken: , instNo:, line}
 		//in current instruction, if there's not preceding space and if the istruction is not IF, totally return
+		if(currentLineNumberId==='coderowtrid__null')
+		return;
+
 		var curSpace = spaceCount(curInstLine);
 		var populateSS = function() {
 			if(curSpace === 0)
@@ -2010,6 +2013,7 @@ var DataVisualizer = (function () {
 								}
 								if(printDetect(curInstLine)!==-1)
 								{
+									// console.log(currentLineNumberId);
 									document.getElementById(currentLineNumberId).style.backgroundColor="#F29EDE";
 									document.getElementById(currentLineCodeId).style.color="black";
 								}	
@@ -2229,7 +2233,7 @@ var DataVisualizer = (function () {
 				$(this).empty();
 
 				if(index === scopeStack.length - 1){
-					console.log("in hereeeeeeeeerrrrrrr")
+					// console.log("in hereeeeeeeeerrrrrrr")
 					$(this).css("border", "3px solid #aaaaaa");	
 				}
 				
@@ -2341,6 +2345,7 @@ var DataVisualizer = (function () {
 		var curThing = this.curTrace[curInstr].heap;
 		var curEntry = this.curTrace[curInstr];
 		var set = this.recursiveFunctions;
+		var functionManyTimes = new Map(); // to store the recursive functions with iterations more than 5
 		var myStack = this.curTrace[curInstr].stack_to_render;
 		var myStackLength = myStack.length;
 		var i;
@@ -2361,10 +2366,32 @@ var DataVisualizer = (function () {
 			else
 			count=0;
 			stackEntry['iteration'] = count;
+			if(count>5)
+			{
+				functionManyTimes.set(functionName, count);
+			}
+
 			myStack[i] = stackEntry;
 			prevFunctionName=functionName;
 		}
-		// console.log(myStack);
+		var myStackToRender =[];
+		
+		for(i=0;i<myStackLength;i++)
+		{
+			var stackEntry = myStack[i];
+			var functionName = stackEntry.func_name;
+			var value = functionManyTimes.get(functionName);
+			if(value===undefined)
+			{
+				myStackToRender.push(stackEntry);
+				continue;
+			}
+			count = stackEntry['iteration'];
+			if(count===1 || count===2 || count===value || count===(value-1))
+			myStackToRender.push(stackEntry);
+
+		}
+		console.log(myStackToRender);
         var curToplevelLayout = this.curTraceLayouts[curInstr];
         myViz.resetJsPlumbManager(); // very important!!!
         // for simplicity (but sacrificing some performance), delete all
@@ -2888,9 +2915,7 @@ var DataVisualizer = (function () {
             else if (myViz.params.showAllFrameLabels) {
                 headerLabel = headerLabel + ' [parent=Global]';
             }
-			var Anush=4;
-			// console.log("Inside stack header "+headerLabel);
-			// console.log(set.has(headerLabel));
+		
 			if(set.has(headerLabel))
 			return headerLabel+"  (Recursive) " ;
 			else
