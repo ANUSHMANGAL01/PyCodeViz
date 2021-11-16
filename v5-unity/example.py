@@ -19,7 +19,7 @@ def calculate_fact(n):
     return fact(n)
 def calculate_fact_2(n):
     return calculate_fact(n)
-print(calculate_fact_2(2))
+print(calculate_fact_2(7))
 list = [1,2,True, "Hello", 4.5]
 list2 = [3,3,3,3]
 
@@ -43,4 +43,11 @@ while(i<2):
 class Anush1:
     def hello():
         print("Hello")
-        
+
+nn=4
+if(nn==1):
+    print(nn)
+elif(nn==2):
+    print(nn)
+elif(nn==4):
+    print(nn)     
