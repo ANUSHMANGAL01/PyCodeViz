@@ -706,12 +706,14 @@ var ExecutionVisualizer = (function () {
         var myViz = this; // to prevent confusion of 'this' inside of nested functions
         if (this.params.verticalStack) {
             this.domRoot.html('<table border="0" class="visualizer">\
+                           <tr><td class="vizLayoutTd" id="vizLayoutTdZero""></td></tr>\
                            <tr><td class="vizLayoutTd" id="vizLayoutTdFirst""></td></tr>\
                            <tr><td class="vizLayoutTd" id="vizLayoutTdSecond"></td></tr>\
                          </table>');
         }
         else {
             this.domRoot.html('<table border="0" class="visualizer"><tr>\
+                           <td class="vizLayoutTd" id="vizLayoutTdZero"></td>\
                            <td class="vizLayoutTd" id="vizLayoutTdFirst"></td>\
                            <td class="vizLayoutTd" id="vizLayoutTdSecond"></td>\
                          </tr></table>');
@@ -764,7 +766,7 @@ var ExecutionVisualizer = (function () {
                     _this.params.updateOutputCallback(_this);
             }
         });
-        this.outputBox = new ProgramOutputBox(this, this.domRoot.find('#vizLayoutTdSecond'), this.params.embeddedMode ? '45px' : null);
+        this.outputBox = new ProgramOutputBox(this, this.domRoot.find('#vizLayoutTdZero'), this.params.embeddedMode ? '45px' : null);
         this.dataViz = new DataVisualizer(this, this.domRoot.find('#vizLayoutTdSecond'), this.domRootD3.select('#vizLayoutTdSecond'));
         myViz.navControls.showError(this.instrLimitReachedWarningMsg);
         myViz.navControls.setupSlider(this.curTrace.length - 1);
@@ -1355,7 +1357,7 @@ var DataVisualizer = (function () {
 
 
 
-        var codeVizHTML = "\n      <div class=\"container\" id=\"dataViz\">\n    <table id=\"stackHeapTable\">\n           <tr>\n             "+"<td id=\"func_td\">\n               <div id=\"funcPart\">\n                 <div id=\"funcHeader\" style=\"color:white\" >Classes & Functions</div>\n               </div>\n             </td>\n          <td id=\"stack_td\">\n               <div id=\"globals_area\">\n                 <div id=\"stackHeader\" style=\"color:white ; font-size:15px; text-align:center;\">" + this.getRealLabel("Frames") + "</div>\n               </div>\n               <div id=\"stack\">" + "</div>\n             </td>\n          "+"<td id=\"heap_td\">\n               <div id=\"heap\">\n                 <div id=\"heapHeader\"  >" + this.getRealLabel("Objects")  + "</div>\n               </div>\n             </td>\n           "+"<td id=\"func_td\">\n               <div id=\"flow\">\n                 <div id=\"funcHeader\">Loops & If</div>\n               </div>\n             </td>\n           </tr>\n         </table>\n       </div>";
+        var codeVizHTML = "\n  <div style=\"text-align:center\"><h1 style=\"color:white\"><u>Data Visualiser</u></h1></div> \n<div class=\"container\" id=\"dataViz\">\n    <table id=\"stackHeapTable\">\n           <tr>\n             "+"<td id=\"func_td\">\n               <div id=\"funcPart\">\n                 <div id=\"funcHeader\" style=\"color:white\" >Classes & Functions</div>\n               </div>\n             </td>\n          <td id=\"stack_td\">\n               <div id=\"globals_area\">\n                 <div id=\"stackHeader\" style=\"color:white ; font-size:15px; text-align:center;\">" + this.getRealLabel("Frames") + "</div>\n               </div>\n               <div id=\"stack\">" + "</div>\n             </td>\n          "+"<td id=\"heap_td\">\n               <div id=\"heap\">\n                 <div id=\"heapHeader\"  >" + this.getRealLabel("Objects")  + "</div>\n               </div>\n             </td>\n           "+"<td id=\"func_td\">\n               <div id=\"flow\">\n                 <div id=\"funcHeader\">Loops & If</div>\n               </div>\n             </td>\n           </tr>\n         </table>\n       </div>";
         this.domRoot.append(codeVizHTML);
         // create a persistent globals frame
         // (note that we need to keep #globals_area separate from #stack for d3 to work its magic)
@@ -4002,7 +4004,7 @@ var ProgramOutputBox = (function () {
         this.numStdoutLines = 0;
         this.owner = owner;
         this.domRoot = domRoot;
-        var outputsHTML = '<div id="progOutputs">\
+        var outputsHTML = '<div style=\"text-align:center\"><h1 style=\"color:white\"><u>OutputBox</u></h1></div><div id="progOutputs">\
          <div id="printOutputDocs">Print output (drag lower right corner to resize)</div>\n\
          <textarea id="pyStdout" cols="40" rows="5" wrap="off" readonly></textarea>\
        </div>';
@@ -4028,8 +4030,8 @@ var ProgramOutputBox = (function () {
             stdoutHeight = heightOverride;
         }
         // do this only after adding outputsHTML to the DOM
-        this.domRoot.find('#pyStdout').width('350px')
-            .height('100px')
+        this.domRoot.find('#pyStdout').width('250px')
+            .height('540px')
             .resizable();
     }
     ProgramOutputBox.prototype.renderOutput = function (stdoutStr) {
@@ -12300,10 +12302,8 @@ $.widget("ui.resizable", $.ui.mouse, {
 		if (this.element[0].nodeName.match(/^(canvas|textarea|input|select|button|img)$/i)) {
 
 			this.element.wrap(
-				$("<div class='ui-wrapper' style='overflow: hidden;'></div>").css({
-					position: this.element.css("position"),
-					width: this.element.outerWidth(),
-					height: this.element.outerHeight(),
+				$("<div class='ui-wrapper' style='overflow: hidden; width:260px; height:560px'></div>").css({
+					position: this.element.css("position"),					
 					top: this.element.css("top"),
 					left: this.element.css("left")
 				})
