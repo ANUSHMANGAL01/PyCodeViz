@@ -4572,7 +4572,7 @@ var NavigationController = (function () {
     };
     NavigationController.prototype.showError = function (msg) {
         if (msg) {
-            this.domRoot.find("#errorOutput").html(htmlspecialchars(msg) + "\n      <span style=\"font-size: 9pt; color: #666\">(see <a href=\"https://github.com/pgbovine/OnlinePythonTutor/blob/master/unsupported-features.md\" target=\"_blank\">unsupported features</a>)</span>").show();
+            this.domRoot.find("#errorOutput").html(htmlspecialchars(msg) + "\n      <span style=\"font-size: 9pt; color: white\">(see <a href=\"https://github.com/pgbovine/OnlinePythonTutor/blob/master/unsupported-features.md\" target=\"_blank\" style=\"color:yellow\">unsupported features</a>)</span>").show();
         }
         else {
             this.domRoot.find("#errorOutput").hide();
