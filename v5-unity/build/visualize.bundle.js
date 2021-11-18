@@ -1372,8 +1372,9 @@ var DataVisualizer = (function () {
 		{
 			var cE = cT[i];
 			var nE = cT[i+1];
-			if(cE.event =='return'&&nE.event =='return'&&cE.func_name===nE.func_name&&cE.func_name!=='<module>')
+			if(cE.event =='return'&&nE.event =='return'&&cE.func_name===nE.func_name&&cE.func_name!=='<module>' &&cE.func_name!=='__init__')
 			{
+				console.log("Anush" + cE.func_name);
 				rf.add(cE.func_name);
 			}
 		}
