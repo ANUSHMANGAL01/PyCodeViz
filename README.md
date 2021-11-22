@@ -1,4 +1,4 @@
-# PyCodeVis
+# PyCodeViz
 
 This is an extension of the popular online tool Python Tutor. It alters the visualization by separating functional components like Functions and Class declarations. It also adds to the original by rendering separate details like Loops, If-conditions and code frequency.
 
