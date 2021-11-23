@@ -20,7 +20,7 @@ To run locally on your own computer, to run Python visualizations try:
 
 ```
 pip install bottle # make sure the bottle webserver (http://bottlepy.org/) is installed
-cd OnlinePythonTutor/v5-unity/
+cd PyCodeViz/v5-unity/
 python bottle_server.py
 ```
 
