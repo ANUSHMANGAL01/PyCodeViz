@@ -30,11 +30,11 @@ You should see the visualizer at: http://localhost:8003/visualize.html
 - Click the 'Visualize Code' button
 - Move through the code by using the Next or Prev button. You can set-up intermediate stop points to directly jump between too
 - The color of the code line number specifies the frequency of usage of that corresponding code line: grey, if unvisited and darkening shades of yellow to red to indicate increasing frequency
-- There are four sections in the execution visualization: Functions & classes, Frames, Objects and For & If structures
+- There are four sections in the execution visualization: Classes and functions, Frames, Objects and Loop & If structures
 - The Functions and Classes section shows all the global functions and class definitions
 - The Frames section shows all the frame-wise variables both local and global
 - The Objects section shows the complex objects connected to their declaration instance in the frames section
-- The For and If section visualizes all the current open loops and iterations and shows various details such as the current iteration number and the truth value of the condition in the If
+- The Loop and If section visualizes all the current open loops and iterations and shows various details such as the current iteration number and the truth value of the condition in the If
 
 Traverse through the code and have a fun experience learning!
 
