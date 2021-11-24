@@ -1,6 +1,6 @@
 # PyCodeViz
 
-This is an extension of the popular online tool Python Tutor. It alters the visualization by separating functional components like Functions and Class declarations. It also adds to the original by rendering separate details like Loops, If-conditions and code frequency.
+This is an improved version of the popular online tool Python Tutor. It alters the visualization by separating functional components like Functions and Class declarations. It also adds to the original by rendering separate details like Loops, If-conditions and code frequency.
 
 Python Tutor -- http://pythontutor.com/ -- helps people overcome a fundamental barrier to learning programming: understanding what happens as the computer executes each line of a program's source code. Using this tool, you can write Python, Java, JavaScript, TypeScript, Ruby, C, and C++ programs in your Web browser and visualize what the computer is doing step-by-step as it executes those programs.
 
