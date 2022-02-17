@@ -4,9 +4,8 @@ This is an improved version of the popular online tool Python Tutor. It alters t
 
 Python Tutor -- http://pythontutor.com/ -- helps people overcome a fundamental barrier to learning programming: understanding what happens as the computer executes each line of a program's source code. Using this tool, you can write Python, Java, JavaScript, TypeScript, Ruby, C, and C++ programs in your Web browser and visualize what the computer is doing step-by-step as it executes those programs.
 
-This tool was created by [Philip Guo](http://pgbovine.net/) in January 2010. [See project history](history.txt).
+This tool was created by Philip Guo in January 2010. [See project history](history.txt).
 
-All documentation is viewable online at: https://github.com/pgbovine/OnlinePythonTutor/tree/master/v3/docs
 
 ### The New Version
 
