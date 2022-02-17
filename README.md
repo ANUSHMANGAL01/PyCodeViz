@@ -1,6 +1,6 @@
 # PyCodeViz
 
-This is an improved version of the popular online tool Python Tutor. It alters the visualization by separating functional components like Functions and Class declarations. It also adds to the original by rendering separate details like Loops, If-conditions and code frequency.
+This is an improved version of the popular online tool Python Tutor. It alters the visualization by separating functional components like Functions and Class declarations. It also adds to the original by rendering separate details like Loops, If-conditions and code frequency. It is only made for Python.
 
 Python Tutor -- http://pythontutor.com/ -- helps people overcome a fundamental barrier to learning programming: understanding what happens as the computer executes each line of a program's source code. Using this tool, you can write Python, Java, JavaScript, TypeScript, Ruby, C, and C++ programs in your Web browser and visualize what the computer is doing step-by-step as it executes those programs.
 
@@ -9,7 +9,7 @@ This tool was created by Philip Guo in January 2010. [See project history](histo
 
 ### The New Version
 
-The bcode ase has been borrowed from [this](https://github.com/ajesse11x/OnlinePythonTutor) repository.
+The basecode has been borrowed from [this](https://github.com/ajesse11x/OnlinePythonTutor) repository.
 
 
 ### How To Run
