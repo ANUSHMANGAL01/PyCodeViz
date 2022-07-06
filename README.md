@@ -10,6 +10,13 @@ This tool was created by Philip Guo in January 2010. [See project history](histo
 ### The New Version
 
 The basecode has been borrowed from [this](https://github.com/ajesse11x/OnlinePythonTutor) repository.
+This work is then further borrowed from [this](https://github.com/saidattatiruvuru/PythonCodeVisualizer) repository.
+I was asked to add some more features to the above repository. I, being a beginner, made some visual changes and added some more features such as detection of recursive functions, adding the feature to show and hide the output, color coding of lines, and some more similar minor changes.
+This was my first work and I was introduced to JavaScript, HTML and CSS because of this. It took some time to understand and do everything. 
+The work was done in around 15 or so days because of time constraints. However, this work is important to me as I learned a lot doing this.  
+
+### Papers
+I, along with my senior Eashaan A. Rao, and my mentor, Dr. Sridhar Chimalakonda, wrote the research paper for this work to submit in ICPC Demo 22 and ICSE Demo 22 tracks. The works, although were not accepted, taught me a lot in terms of paper writing and the effort it takes to do everything.
 
 
 ### How To Run
